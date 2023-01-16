@@ -1,5 +1,6 @@
 package com.gabi.os.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,12 @@ public class OsService {
 		return fromDTO(osDTO);
 	}
 	
+	public OS update(@Valid OsDTO osDTO) {
+		
+		findById(osDTO.getId());
+		return fromDTO(osDTO);
+	}
+	
 	private OS fromDTO(OsDTO os) {
 		
 		OS newOs = new OS();
@@ -60,8 +67,13 @@ public class OsService {
 		newOs.setTecnico(tecnico);
 		newOs.setCliente(cliente);
 		
+		if(newOs.getStatus().getCod().equals(2)) {
+			newOs.setDataFechamento(LocalDateTime.now());
+		}
+		
 		return osRepository.save(newOs);
 		
 	}
+
 
 }
