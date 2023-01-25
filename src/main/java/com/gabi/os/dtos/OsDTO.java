@@ -7,6 +7,8 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gabi.os.domain.OS;
+import com.gabi.os.domain.enuns.Prioridade;
+import com.gabi.os.domain.enuns.Status;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +47,14 @@ public class OsDTO implements Serializable{
 		this.observacoes = os.getObservacoes();
 		this.tecnico = os.getTecnico().getId();
 		this.cliente = os.getCliente().getId();
+	}
+	
+	public Status getStatus() {
+		return Status.toEnum(this.status);
+	}
+	
+	public Prioridade getPrioridade() {
+		return Prioridade.toEnum(this.prioridade);
 	}
 
 	
